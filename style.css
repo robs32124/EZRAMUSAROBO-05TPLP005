@@ -1,0 +1,41 @@
+body {
+    background-color: #f8f9fa; /* Warna latar belakang umum */
+    font-family: Arial, sans-serif; /* Gaya font untuk seluruh halaman */
+}
+
+nav {
+    min-width: 250px;
+    background-color: #1ccf8b; /* Warna latar belakang sidebar */
+    color: white; /* Warna teks sidebar */
+}
+
+nav a {
+    color: white; /* Warna teks tautan */
+}
+
+nav a:hover {
+    background-color: #c4e9c6; /* Warna latar belakang saat tautan dihover */
+}
+
+.table {
+    background-color: white; /* Warna latar belakang tabel */
+    border-radius: 5px; /* Membuat sudut tabel menjadi melengkung */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Bayangan tabel */
+}
+
+.table th {
+    background-color: #343a40; /* Warna latar belakang header tabel */
+    color: white; /* Warna teks header tabel */
+}
+
+.table td {
+    vertical-align: middle; /* Vertikal rata tengah untuk isi tabel */
+}
+
+/* Gaya untuk konten utama */
+.p-4 {
+    background-color: #ebd3eb; /* Warna latar belakang konten utama */
+    border-radius: 5px; /* Membuat sudut konten utama menjadi melengkung */
+    box-shadow: 0 0 10px rgba(198, 17, 214, 0.1); /* Bayangan konten utama */
+    padding: 20px; /* Padding untuk konten utama */
+}

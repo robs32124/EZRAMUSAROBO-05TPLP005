@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Karyawan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="d-flex">
+        <nav class="bg-primary p-3 text-white vh-100" style="width: 250px;">
+            <h4 class="text-center">Manajemen Karyawan</h4>
+            <ul class="nav flex-column mt-4">
+                <li class="nav-item">
+                    <a class="nav-link text-white" href="#" onclick="tampilkanKonten('dashboard')">Dashboard</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white" href="#" onclick="toggleDropdown('menuKaryawan')">Menu Karyawan</a>
+                    <ul class="nav flex-column ms-3" id="menuKaryawan" style="display: none;">
+                        <li class="nav-item"><a class="nav-link text-white" href="#" onclick="tampilkanKonten('karyawan')">Karyawan</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#" onclick="tampilkanKonten('jabatan')">Jabatan</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#" onclick="tampilkanKonten('divisi')">Divisi</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white" href="#" onclick="toggleDropdown('menuAbsensi')">Menu Absensi</a>
+                    <ul class="nav flex-column ms-3" id="menuAbsensi" style="display: none;">
+                        <li class="nav-item"><a class="nav-link text-white" href="#" onclick="tampilkanKonten('absensi')">Absensi</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#" onclick="tampilkanKonten('izin')">Izin</a></li>
+                        <li class="nav-item"><a class="nav-link text-white" href="#" onclick="tampilkanKonten('lembur')">Lembur</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link text-white" href="#" onclick="toggleDropdown('menuPenggajian')">Menu Penggajian</a>
+                    <ul class="nav flex-column ms-3" id="menuPenggajian" style="display: none;">
+                        <li class="nav-item"><a class="nav-link text-white" href="#" onclick="tampilkanKonten('slipGaji')">Slip Gaji</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link text-white" href="#" onclick="tampilkanKonten('logout')">Logout</a></li>
+            </ul>
+        </nav>
+
+        <!-- Konten Utama -->
+        <div class="p-4" style="flex: 1;">
+            <div id="konten"></div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Kustom -->
+    <script>
+        // Memuat konten awal
+        document.addEventListener('DOMContentLoaded', function() {
+            tampilkanKonten('dashboard');
+        });
+
+        // Fungsi untuk menampilkan konten berdasarkan bagian yang diklik
+        function tampilkanKonten(bagian) {
+            const konten = document.getElementById('konten');
+            let isiKonten = '';
+
+            switch (bagian) {
+                case 'dashboard':
+                    isiKonten = `
+                        <h3>Dashboard</h3>
+                        WELCOME,EZRA MUSA ROBO
+                        <div class="row mt-4">
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Total Karyawan</h5>
+                                        <p class="card-text">20</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Hadir Hari Ini</h5>
+                                        <p class="card-text">15</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Cuti</h5>
+                                        <p class="card-text">5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Tugas Tertunda</h5>
+                                        <p class="card-text">7</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+
+                case 'karyawan':
+                    isiKonten = `
+                        <h3>Data Karyawan</h3>
+                        <table class="table mt-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Jabatan</th>
+                                    <th>Divisi</th>
+                                    <th>Email</th>
+                                    <th>No. Telepon</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>John Doe</td><td>Manajer</td><td>HR</td><td>johndoe@example.com</td><td>08123456789</td></tr>
+                                <tr><td>2</td><td>Jane Smith</td><td>Developer</td><td>IT</td><td>janesmith@example.com</td><td>08987654321</td></tr>
+                                <tr><td>3</td><td>Emily Johnson</td><td>Desainer</td><td>Marketing</td><td>emilyj@example.com</td><td>08765432100</td></tr>
+                                <tr><td>4</td><td>Michael Brown</td><td>Pengembang</td><td>IT</td><td>michaelb@example.com</td><td>08654321009</td></tr>
+                                <tr><td>5</td><td>Linda Davis</td><td>HR</td><td>HR</td><td>lindad@example.com</td><td>08543210988</td></tr>
+                                <tr><td>6</td><td>James Wilson</td><td>Manajer Proyek</td><td>IT</td><td>jamesw@example.com</td><td>08432109877</td></tr>
+                                <tr><td>7</td><td>Patricia Taylor</td><td>Analisis Bisnis</td><td>Business</td><td>patriciat@example.com</td><td>08321098766</td></tr>
+                                <tr><td>8</td><td>Robert Martinez</td><td>Teknisi</td><td>IT</td><td>robertm@example.com</td><td>08210987655</td></tr>
+                                <tr><td>9</td><td>Jennifer Clark</td><td>Staf Akuntansi</td><td>Finance</td><td>jenniferc@example.com</td><td>08109876544</td></tr>
+                                <tr><td>10</td><td>William Lewis</td><td>Asisten Manajer</td><td>HR</td><td>williaml@example.com</td><td>08098765433</td></tr>
+                            </tbody>
+                        </table>
+                    `;
+                    break;
+
+                case 'jabatan':
+                    isiKonten = `
+                        <h3>Jabatan</h3>
+                        <table class="table mt-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Jabatan</th>
+                                    <th>Deskripsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>Manajer</td><td>Mengelola operasi departemen</td></tr>
+                                <tr><td>2</td><td>Developer</td><td>Bertanggung jawab atas pengembangan perangkat lunak</td></tr>
+                                <tr><td>3</td><td>Desainer</td><td>Mendesain materi pemasaran dan produk</td></tr>
+                                <tr><td>4</td><td>Analisis Bisnis</td><td>Menilai kebutuhan bisnis dan solusi</td></tr>
+                                <tr><td>5</td><td>Staf Akuntansi</td><td>Menangani laporan keuangan</td></tr>
+                                <tr><td>6</td><td>Teknisi</td><td>Memelihara dan memperbaiki sistem TI</td></tr>
+                                <tr><td>7</td><td>Asisten Manajer</td><td>Mendukung manajer dalam tugas sehari-hari</td></tr>
+                                <tr><td>8</td><td>Manajer Proyek</td><td>Mengelola proyek dari awal hingga selesai</td></tr>
+                                <tr><td>9</td><td>Staf HR</td><td>Menangani rekrutmen dan kesejahteraan karyawan</td></tr>
+                                <tr><td>10</td><td>Pemasaran</td><td>Merencanakan dan melaksanakan strategi pemasaran</td></tr>
+                            </tbody>
+                        </table>
+                    `;
+                    break;
+
+                case 'divisi':
+                    isiKonten = `
+                        <h3>Divisi</h3>
+                        <table class="table mt-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Divisi</th>
+                                    <th>Deskripsi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>HR</td><td>Departemen Sumber Daya Manusia</td></tr>
+                                <tr><td>2</td><td>IT</td><td>Departemen Teknologi Informasi</td></tr>
+                                <tr><td>3</td><td>Marketing</td><td>Departemen Pemasaran</td></tr>
+                                <tr><td>4</td><td>Finance</td><td>Departemen Keuangan</td></tr>
+                                <tr><td>5</td><td>Operasional</td><td>Departemen Operasional Harian</td></tr>
+                                <tr><td>6</td><td>Pengembangan Produk</td><td>Departemen Pengembangan Produk</td></tr>
+                                <tr><td>7</td><td>Akuntansi</td><td>Departemen Akuntansi dan Pembukuan</td></tr>
+                                <tr><td>8</td><td>Customer Service</td><td>Departemen Layanan Pelanggan</td></tr>
+                                <tr><td>9</td><td>Logistik</td><td>Departemen Manajemen Rantai Pasokan</td></tr>
+                                <tr><td>10</td><td>Riset dan Pengembangan</td><td>Departemen Inovasi dan Penelitian</td></tr>
+                            </tbody>
+                        </table>
+                    `;
+                    break;
+
+                case 'absensi':
+                    isiKonten = `
+                        <h3>Absensi</h3>
+                        <table class="table mt-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Jabatan</th>
+                                    <th>Tanggal</th>
+                                    <th>Jam Masuk</th>
+                                    <th>Jam Pulang</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>John Doe</td><td>Manajer</td><td>01/11/2024</td><td>08:00</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>2</td><td>Jane Smith</td><td>Developer</td><td>01/11/2024</td><td>08:15</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>3</td><td>Emily Johnson</td><td>Desainer</td><td>01/11/2024</td><td>08:30</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>4</td><td>Michael Brown</td><td>Pengembang</td><td>01/11/2024</td><td>09:00</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>5</td><td>Linda Davis</td><td>HR</td><td>01/11/2024</td><td>08:45</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>6</td><td>James Wilson</td><td>Manajer Proyek</td><td>01/11/2024</td><td>08:05</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>7</td><td>Patricia Taylor</td><td>Analisis Bisnis</td><td>01/11/2024</td><td>08:10</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>8</td><td>Robert Martinez</td><td>Teknisi</td><td>01/11/2024</td><td>08:20</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>9</td><td>Jennifer Clark</td><td>Staf Akuntansi</td><td>01/11/2024</td><td>08:00</td><td>17:00</td><td>Hadir</td></tr>
+                                <tr><td>10</td><td>William Lewis</td><td>Asisten Manajer</td><td>01/11/2024</td><td>08:30</td><td>17:00</td><td>Hadir</td></tr>
+                            </tbody>
+                        </table>
+                    `;
+                    break;
+
+                case 'izin':
+                    isiKonten = `
+                        <h3>Izin</h3>
+                        <table class="table mt-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Tanggal Izin</th>
+                                    <th>Durasi (Hari)</th>
+                                    <th>Alasan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>John Doe</td><td>01/11/2024</td><td>1</td><td>Sakit</td></tr>
+                                <tr><td>2</td><td>Jane Smith</td><td>02/11/2024</td><td>2</td><td>Keluarga</td></tr>
+                                <tr><td>3</td><td>Emily Johnson</td><td>03/11/2024</td><td>1</td><td>Kepentingan Pribadi</td></tr>
+                                <tr><td>4</td><td>Michael Brown</td><td>04/11/2024</td><td>3</td><td>Sakit</td></tr>
+                                <tr><td>5</td><td>Linda Davis</td><td>05/11/2024</td><td>2</td><td>Liburan</td></tr>
+                            </tbody>
+                        </table>
+                    `;
+                    break;
+
+                case 'lembur':
+                    isiKonten = `
+                        <h3>Lembur</h3>
+                        <table class="table mt-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Tanggal Lembur</th>
+                                    <th>Jam Lembur</th>
+                                    <th>Keterangan</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>John Doe</td><td>01/11/2024</td><td>2</td><td>Proyek Mendadak</td></tr>
+                                <tr><td>2</td><td>Jane Smith</td><td>01/11/2024</td><td>3</td><td>Perbaikan Sistem</
+                                                                    </td></tr>
+                                <tr><td>3</td><td>Emily Johnson</td><td>02/11/2024</td><td>1</td><td>Meeting Klien</td></tr>
+                                <tr><td>4</td><td>Michael Brown</td><td>02/11/2024</td><td>2</td><td>Pengembangan Fitur</td></tr>
+                                <tr><td>5</td><td>Linda Davis</td><td>03/11/2024</td><td>4</td><td>Penyusunan Laporan</td></tr>
+                            </tbody>
+                        </table>
+                    `;
+                    break;
+
+                case 'slipGaji':
+                    isiKonten = `
+                        <h3>Slip Gaji</h3>
+                        <table class="table mt-4">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama</th>
+                                    <th>Bulan</th>
+                                    <th>Tahun</th>
+                                    <th>Gaji Pokok</th>
+                                    <th>Tunjangan</th>
+                                    <th>Potongan</th>
+                                    <th>Total Gaji</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1</td><td>John Doe</td><td>Oktober</td><td>2024</td><td>5,000,000</td><td>1,000,000</td><td>500,000</td><td>5,500,000</td></tr>
+                                <tr><td>2</td><td>Jane Smith</td><td>Oktober</td><td>2024</td><td>6,000,000</td><td>1,200,000</td><td>600,000</td><td>6,600,000</td></tr>
+                                <tr><td>3</td><td>Emily Johnson</td><td>Oktober</td><td>2024</td><td>4,500,000</td><td>800,000</td><td>400,000</td><td>4,900,000</td></tr>
+                                <tr><td>4</td><td>Michael Brown</td><td>Oktober</td><td>2024</td><td>5,200,000</td><td>900,000</td><td>450,000</td><td>5,650,000</td></tr>
+                                <tr><td>5</td><td>Linda Davis</td><td>Oktober</td><td>2024</td><td>5,800,000</td><td>1,100,000</td><td>550,000</td><td>6,350,000</td></tr>
+                            </tbody>
+                        </table>
+                    `;
+                    break;
+
+                case 'logout':
+                    isiKonten = `<h3>Logout</h3><p>Anda telah berhasil keluar dari sistem.</p>`;
+                    break;
+
+                default:
+                    isiKonten = `<h3>Halaman Tidak Ditemukan</h3>`;
+            }
+
+            konten.innerHTML = isiKonten;
+        }
+
+        // Fungsi untuk menampilkan atau menyembunyikan dropdown
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.style.display = dropdown.style.display === 'none' || dropdown.style.display === '' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
